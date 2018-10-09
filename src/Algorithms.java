@@ -1,6 +1,28 @@
 import java.util.Random;
 
 public class Algorithms {
+/*
+    опыты с рекурсией
+ */
+    private static int[] ar={1,2,3,4,5};
+
+    private static int sum(int l){
+        //int s=0;
+        if (l==0) return ar[0];
+        return sum(l-1)+ar[l];
+    }
+    private static int sum(int[] m){
+        int l=m.length;
+        int[] n=new int[l];
+        int s=0;
+        System.arraycopy(m,0,n,0,l);
+        s=s+n[l-1];
+        if (l==1) return n[0];
+        n=new int[--l];
+        System.arraycopy(m,0,n,0,l);
+        return sum(n);
+    }
+    //************
     public static void main(String[] args) {
 //        System.out.println(Math.sqrt(2,5));
 //
@@ -39,8 +61,9 @@ public class Algorithms {
         while (!t.isEmpty()) {
             System.out.println(t.removeRight());
             System.out.println("L->"+t.length());
+
+            System.out.println("R_len"+sum(4));
+            System.out.println("R_mas"+sum(ar));
         }
-
-
     }
 }
