@@ -20,7 +20,9 @@ public class Algorithms {
         System.out.println(Arrays.toString(quicksort(new int[]{1,24,25,365,78,96,4,4,8,47,5,54,8,0,5,55,444,655,65,2,55,5})));
 
     }
-
+    /*
+        опыты с рекурсией
+     */
     static int sum(int[] m) {
         if (m.length == 0) throw new ArrayIndexOutOfBoundsException("Пустой массив ¯\\_(ツ)_/¯");
         if (m.length == 1) return m[0];
@@ -42,6 +44,7 @@ public class Algorithms {
 //                //1+countArrIndex(Arrays.copyOf(m,m.length-1));
 //    }
 
+//слияние любого количестов масивов
     static int[] unionArr(int[]... m) {
         int l=0;
         for (int i = 0; i <m.length ; i++)
@@ -54,7 +57,7 @@ public class Algorithms {
         }
         return ar;
     }
-
+//быстрая сартировка
     static int[] quicksort(int[] m) {
         if (m.length < 2) return m;
         int m1[] = {}, m2[] = {};

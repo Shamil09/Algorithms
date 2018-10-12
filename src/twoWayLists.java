@@ -1,8 +1,8 @@
-public class RelatedList {
+public class twoWayLists{
     private class Node {
         Cat c;
         Node next;
-        public Node(Cat c) {
+        Node(Cat c) {
             this.c = c;
         }
         @Override
@@ -18,16 +18,18 @@ public class RelatedList {
         }
     }
 
-    private Node head;
+    private Node head,last;
 
-    public RelatedList() {
+    public twoWayLists() {
         head = null;
     }
     public boolean isEmpty() {
         return head == null;
     }
+
     public void insert(Cat c) {
         Node n = new Node(c);
+        if (isEmpty()) last = n;
         n.next = head;
         head = n;
     }
@@ -39,6 +41,17 @@ public class RelatedList {
         head = head.next;
         return c;
     }
+    public void insertLast(Cat c){
+        Node n = new Node(c);
+        if (isEmpty()){
+            head = n;
+        } else {
+            last.next =n;
+        }
+        last = n;
+    }
+
+
     @Override
     public String toString() {
         Node current = head;
