@@ -1,28 +1,10 @@
-import java.util.Random;
+import com.sun.deploy.util.ArrayUtil;
+
+import java.util.Arrays;
 
 public class Algorithms {
-/*
-    опыты с рекурсией
- */
-    private static int[] ar={1,2,3,4,5};
+    private static int[] arr = {1, 2, 3, 4, 5, 6};
 
-    private static int sum(int l){
-        //int s=0;
-        if (l==0) return ar[0];
-        return sum(l-1)+ar[l];
-    }
-    private static int sum(int[] m){
-        int l=m.length;
-        int[] n=new int[l];
-        int s=0;
-        System.arraycopy(m,0,n,0,l);
-        s=s+n[l-1];
-        if (l==1) return n[0];
-        n=new int[--l];
-        System.arraycopy(m,0,n,0,l);
-        return sum(n);
-    }
-    //************
     public static void main(String[] args) {
 //        System.out.println(Math.sqrt(2,5));
 //
@@ -32,38 +14,60 @@ public class Algorithms {
 //        System.out.println(Math.average(mas));
 
 //        Array ar=new Array(4, 2, 0, -1, -6, 10, 6,-1);
-//        ar.deleteAll(-1,false);
+//        ar.sortBubble();
 //        System.out.println(ar);
+        //System.out.println(countArrIndex(arr));
+        System.out.println(Arrays.toString(quicksort(new int[]{1,24,25,365,78,96,4,4,8,47,5,54,8,0,5,55,444,655,65,2,55,5})));
 
-//        PriorityQueue q = new PriorityQueue(5);
-//        q.insert(30);
-//        q.insert(50);
-//        q.insert(10);
-//        q.insert(40);
-//        q.insert(20);
-//        while( !q.isEmpty() )
-//        {
-//            int item = q.remove();
-//            System.out.print(item + " ");
-//        }
-//        System.out.println();
-//        System.out.println("123456->"+PriorityQueue.shifter("123456"));
-        Deque<String> t = new Deque<>(String[].class,10);
+    }
 
-        t.insertRight("1");
-        t.insertRight("2");
-        t.insertRight("3");
-        t.insertRight("4");
-        t.insertRight("5");
+    static int sum(int[] m) {
+        if (m.length == 0) throw new ArrayIndexOutOfBoundsException("Пустой массив ¯\\_(ツ)_/¯");
+        if (m.length == 1) return m[0];
+        return m[m.length - 1] + sum(Arrays.copyOf(m, m.length - 1));
+    }
 
-        System.out.println("-----------------");
-        System.out.println(t.peekRight());
-        while (!t.isEmpty()) {
-            System.out.println(t.removeRight());
-            System.out.println("L->"+t.length());
+    static int countArrIndex(int[] m) {
+        if (m.length == 0) throw new ArrayIndexOutOfBoundsException("Пустой массив ¯\\_(ツ)_/¯");
+        if (m.length == 1) return 1;
+        return 1 + countArrIndex(Arrays.copyOf(m, m.length - 1));
+    }
 
-            System.out.println("R_len"+sum(4));
-            System.out.println("R_mas"+sum(ar));
+    //    static int maxElArr(int[] m){
+//        if (m.length==0) throw new ArrayIndexOutOfBoundsException("Пустой массив ¯\\_(ツ)_/¯");
+//        if (m.length==1) return m[0];
+//        int max;
+//        if(max<m[m.length-1])
+//        return m[m.length-1]>maxElArr(Arrays.copyOf(m,m.length-1))
+//                //1+countArrIndex(Arrays.copyOf(m,m.length-1));
+//    }
+
+    static int[] unionArr(int[]... m) {
+        int l=0;
+        for (int i = 0; i <m.length ; i++)
+            l+=m[i].length;
+        int[] ar=new int[l];
+        l=0;
+        for (int i = 0; i <m.length ; i++) {
+            System.arraycopy(m[i], 0, ar, l, m[i].length);
+            l += m[i].length;
         }
+        return ar;
+    }
+
+    static int[] quicksort(int[] m) {
+        if (m.length < 2) return m;
+        int m1[] = {}, m2[] = {};
+        int suport[] = {m[0]};
+        for (int i = 1; i < m.length; i++)
+            if (suport[0] >= m[i]) {
+                m1 = Arrays.copyOf(m1, m1.length + 1);
+                m1[m1.length - 1] = m[i];
+            } else {
+                m2 = Arrays.copyOf(m2, m2.length + 1);
+                m2[m2.length - 1] = m[i];
+            }
+        return unionArr(quicksort(m1), suport, quicksort(m2));
     }
 }
+
